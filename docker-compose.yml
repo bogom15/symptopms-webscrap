@@ -1,0 +1,18 @@
+services:
+  web-scrape-api:
+    build: ./symptoms-web-scraper-api-master
+    volumes:
+      - ./webscrape-api:/usr/src/app
+    ports:
+      - 3000:3000
+
+  vue-ui:
+    build:
+      context: ./symptoms-web-scraper-client
+      dockerfile: Dockerfile
+    ports:
+      - "5002:8080"
+    container_name: vue-ui
+    volumes:
+       - ./my-app:/usr/src/app/symptoms-web-scraper-client
+       - /usr/src/app/my-app/node_modules
